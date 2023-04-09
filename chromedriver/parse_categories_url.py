@@ -36,7 +36,7 @@ with driver:
         # добавляем в результирующий словарь ключём название категории а значением словарь с подкатегориями
         dict_results[str_start_category] = dict_subcategories
         # перезаписываем результирующий словарь в файл
-        with open("../../PARSERS_SCRAPY/project2/project2/spiders/catalog_dict.json", "w", encoding='UTF-8') as file:
+        with open("catalog_dict.json", "w", encoding='UTF-8') as file:
             json.dump(dict_results, file, indent=1, ensure_ascii=False)
         # нажимаем кнопку каталог перед следующей итерацией цикла
         driver.find_element('xpath', xpath_catalog).click()
