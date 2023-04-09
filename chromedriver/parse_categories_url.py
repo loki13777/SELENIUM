@@ -7,15 +7,15 @@ driver = webdriver.Chrome(executable_path='chromedriver')
 
 with driver:
     # открываем страницу
-    driver.get(url)
+    driver.get(URL)
     # находим и нажимаем кнопку принять (найстроки coocies)
-    driver.find_element('css selector', css_accept).click()
+    driver.find_element('css selector', CSS_ACCEPT).click()
     time.sleep(1)
     # находим и нажимаем кнопку каталог
-    driver.find_element('xpath', xpath_catalog).click()
+    driver.find_element('xpath', XPATH_CATALOG).click()
     time.sleep(1)
     # находим все стартовые категории
-    start_categories = driver.find_elements('css selector', css_start_categories)
+    start_categories = driver.find_elements('css selector', CSS_START_CATEGORIES)
     # записываем названия категорий в список
     list_start_categories = [el.text for el in start_categories]
     # создаём словарь для записи результата
@@ -29,7 +29,7 @@ with driver:
         driver.find_element('xpath', f"// span[text() = '{str_start_category}']").click()
         time.sleep(3)
         # находим все подкатегории на странице категории
-        subcategories = driver.find_elements('css selector', css_subcategories)
+        subcategories = driver.find_elements('css selector', CSS_SUBCATEGORIES)
         for subcategory in subcategories:
             # записываем в словарь ключём название подкатегории а значением ссылку на эту подкатегорию
             dict_subcategories[subcategory.text] = subcategory.get_attribute('href')
@@ -39,5 +39,5 @@ with driver:
         with open("catalog_dict.json", "w", encoding='UTF-8') as file:
             json.dump(dict_results, file, indent=1, ensure_ascii=False)
         # нажимаем кнопку каталог перед следующей итерацией цикла
-        driver.find_element('xpath', xpath_catalog).click()
+        driver.find_element('xpath', XPATH_CATALOG).click()
         time.sleep(3)
